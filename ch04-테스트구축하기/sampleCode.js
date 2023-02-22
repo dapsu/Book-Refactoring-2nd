@@ -1,5 +1,3 @@
-// 생산자 표현
-
 class Province {  //  지역 전체를 표현
   constructor(doc) {
     this._name = doc.name;
@@ -15,14 +13,58 @@ class Province {  //  지역 전체를 표현
     this._totalProduction += arg.production;
   }
 
-  get name() {return this._name;}
-  get producers() {return this. _producers.slice();}
-  get totalProduction() {return this._totalProduction;}
-  set totalProduction(arg) {this._totalProduction = arg;}
-  get demand() {return this._demand;}
-  set demand(arg) {this._demand =parseInt(arg);} // 숫자로 파싱해서 저장 
-  get price() {return this. _price;}
-  set price(arg) {this._price=parseint(arg);} // 숫자로 파싱해서 저장
+  get name() {
+    return this._name;
+  }
+  get producers() {
+    return this._producers.slice();
+  }
+  get totalProduction() {
+    return this._totalProduction;
+  }
+  set totalProduction(arg) {
+    this._totalProduction = arg;
+  }
+  get demand() {
+    return this._demand;
+  }
+  set demand(arg) {   // 숫자로 파싱해서 저장
+    this._demand = parseInt(arg);
+  }
+  get price() {
+    return this._price;
+  }
+  set price(arg) {   // 숫자로 파싱해서 저장
+    this._price = parseint(arg);
+  }
+}
+
+class Producer {  // 단순한 데이터 저장소로 쓰임
+  constructor(aProvince, data) {
+    this._province = aProvince;
+    this._cost = data.cost;
+    this._name = data.name;
+    this._production = data.production || 0;
+  }
+
+  get name() {
+    return this._name;
+  }
+  get cost() {
+    return this._cost._cost;
+  }
+  set cost(arg) {
+    this._cost = parseInt(arg);
+  }
+  get production() {
+    return this._production;
+  }
+  set production(amountStr) {
+    const amount = parseInt(amountStr);
+    const newProduction = Number.isNaN(amount) ? 0 : amount;
+    this._province.totalProduction += newProduction - this._production;
+    this._production = newProduction;
+  }
 }
 
 function sampleProvinceData() {  // 생성자의 인수로 쓸 JSON 데이터 생성
