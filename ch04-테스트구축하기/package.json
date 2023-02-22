@@ -3,6 +3,7 @@
     "test": "mocha sampleCode.js"
   },
   "dependencies": {
+    "chai": "^4.3.7",
     "mocha": "^10.2.0"
   }
 }
