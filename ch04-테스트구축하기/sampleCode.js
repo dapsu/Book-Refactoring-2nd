@@ -105,10 +105,16 @@ function sampleProvinceData() {  // 생성자의 인수로 쓸 JSON 데이터 �
   };
 }
 
-const assert = require('assert');
+const { expect } = require('chai');
 describe('province', () => {
+  let asia;
+  beforeEach(() => {
+    asia = new Province(sampleProvinceData());
+  }); 
   it('shortfall', () => {
-    const asia = new Province(sampleProvinceData());  //  픽스처(테스트에 필요한 데이터와 객체) 설정
-    assert.equal(asia.shortfall, 5);  // 검증
+    expect(asia.shortfall).equal(5);
+  });
+  it('profit', () => {
+    expect(asia.profit).equal(230);
   });
 });
