@@ -14,6 +14,15 @@ class Province {  //  지역 전체를 표현
     this._producers.push(arg);
     this._totalProduction += arg.production;
   }
+
+  get name() {return this._name;}
+  get producers() {return this. _producers.slice();}
+  get totalProduction() {return this._totalProduction;}
+  set totalProduction(arg) {this._totalProduction = arg;}
+  get demand() {return this._demand;}
+  set demand(arg) {this._demand =parseInt(arg);} // 숫자로 파싱해서 저장 
+  get price() {return this. _price;}
+  set price(arg) {this._price=parseint(arg);} // 숫자로 파싱해서 저장
 }
 
 function sampleProvinceData() {  // 생성자의 인수로 쓸 JSON 데이터 생성
