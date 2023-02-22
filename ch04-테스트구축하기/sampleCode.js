@@ -28,14 +28,39 @@ class Province {  //  지역 전체를 표현
   get demand() {
     return this._demand;
   }
-  set demand(arg) {   // 숫자로 파싱해서 저장
+  set demand(arg) {
     this._demand = parseInt(arg);
   }
   get price() {
     return this._price;
   }
-  set price(arg) {   // 숫자로 파싱해서 저장
+  set price(arg) {
     this._price = parseint(arg);
+  }
+  get shortfall() {  // 생산 부족분 계산
+    return this._demand - this.totalProduction;
+  }
+
+  get profit() {  // 수익 계산 코드
+    return this.demandValue - this.demandCost;
+  }
+  get demandValue() {
+    return this.satisfiedDemand * this.price;
+  }
+  get satisfiedDemand() {
+    return Math.min(this._demand, this.totalProduction);
+  }
+  get demandCost() {
+    let remainingDemand = this.demand;
+    let result = 0;
+    this.producers
+      .sort((a, b) => a.cost - b.cost)
+      .forEach(p => {
+        const contribution = Math.min(remainingDemand, p.production);
+        remainingDemand -= contribution;
+        result += contribution * p.cost;
+      });
+    return result;
   }
 }
 
